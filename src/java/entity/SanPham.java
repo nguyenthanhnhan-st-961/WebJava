@@ -91,4 +91,5 @@ public class SanPham {
     public String toString() {
         return "SanPham{" + "idSanPham=" + idSanPham + ", tenSanPham=" + tenSanPham + ", hang=" + hang + ", giaBan=" + giaBan + ", hinhAnh=" + hinhAnh + ", moTa=" + moTa + ", trangThai=" + trangThai + '}';
     }
+    
 }
