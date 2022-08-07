@@ -1,0 +1,106 @@
+.action {
+    padding: 5px 0;
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--light);
+    margin-top: 10px;
+}
+.action__add,
+.action__delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4%;
+    padding: 10px 0;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+.action__add {
+    background-color: var(--green);
+}
+.action__delete {
+    background-color: var(--danger);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.action-icon {
+    font-size: 1.4rem;
+    font-weight: 100;
+    color: var(--white);
+}
+/****************** body header ************/
+.subcategories {
+    margin-top: 10px;
+    border: 1px solid var(--gray-dark);
+    border-bottom: none;
+}
+.subcategories__header {
+    display: flex;
+    background-color: var(--light);
+    border-bottom: 1px solid var(--gray-dark);
+}
+.subcategories__header-column {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+}
+.subcategories__header-column:not(:last-child) {
+    border-right: 1px solid var(--gray-dark);
+}
+
+.subcategories__header-choose {
+    width: 10%;
+}
+.subcategories__header-name {
+    width: 80%;
+}
+.subcategories__header-update {
+    width: 10%;
+}
+/**************** body ************/
+.subcategories__body {
+    display: flex;
+    border-bottom: 1px solid var(--gray-dark);
+}
+.subcategories__body:nth-of-type(odd) {
+    background-color: var(--white);
+}
+.subcategories__body:nth-of-type(even) {
+    background-color: var(--light);
+}
+.subcategories__body-column {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+}
+.subcategories__body-column:not(:last-child) {
+    border-right: 1px solid var(--gray-dark);
+}
+
+.subcategories__body-choose {
+    width: 10%;
+}
+.subcategories__body-name {
+    width: 80%;
+}   
+.subcategories__body-update {
+    width: 10%;
+}
+.check-delete {
+    outline: none;
+    cursor: pointer;
+}
+.subcategories__body-icon {
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+    cursor: pointer;
+}
+.subcategories__body-icon:hover {
+    color: var(--orange);
+}

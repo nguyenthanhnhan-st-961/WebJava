@@ -9,14 +9,14 @@ package entity;
  * @author ABC
  */
 public class User {
-   private String id;
+   private int id;
    private String email;
    private String password;
    private String phoneNumber;
    private String diaChi;
    private String name;
 
-    public User(String id, String email, String password, String phoneNumber, String diaChi, String name) {
+    public User(int id, String email, String password, String phoneNumber, String diaChi, String name) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -25,11 +25,11 @@ public class User {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

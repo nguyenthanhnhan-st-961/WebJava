@@ -6,6 +6,7 @@ package control;
 
 import dao.DAO_User;
 import entity.User;
+import entity.UserRoles;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +38,8 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             
+            HttpSession session = request.getSession();
+            
             String email = request.getParameter("email");
             String pass = request.getParameter("pass");
             
@@ -43,8 +47,21 @@ public class LoginController extends HttpServlet {
             
             User us = dao.DangNhap(email, pass);
             
+            
             if(us != null){
-                request.getRequestDispatcher("Home.jsp").forward(request, response);
+                
+                UserRoles usRoles = dao.GetRoleById(us.getId());
+                
+                session.setAttribute("user", us);
+                
+                session.setAttribute("userrole", usRoles);
+                
+                if(usRoles.getIdRole() == 1){  
+                    response.sendRedirect("sanpham");
+                }
+                else{
+                    response.sendRedirect("home");
+                }
             }
             else request.getRequestDispatcher("Login.jsp").forward(request, response);
         }

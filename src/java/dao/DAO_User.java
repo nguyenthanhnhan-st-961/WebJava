@@ -6,6 +6,7 @@ package dao;
 
 import context.DBContext;
 import entity.User;
+import entity.UserRoles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public class DAO_User {
             rs = ps.executeQuery();
             while (rs.next()) {
                 return new User(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -46,29 +47,65 @@ public class DAO_User {
         }
         return null;
     }
+    
+    public UserRoles GetRoleById(int id) {
+        String query = "SELECT [UserId] ,[RoleId] FROM [BANHANGGL].[dbo].[tb_USEROLES] "
+                + "where UserId = ?";
+        try {
+            con = new DBContext().getConnection();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new UserRoles(
+                        rs.getInt(1),
+                        rs.getInt(2));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
-    public void DangKy(String id, String email, String pw, String phone, String dc, String name) {
+    public void PhanQuyen(int id) {
+        String query = "INSERT INTO [BANHANGGL].[dbo].[tb_USEROLES] ([UserId] ,[RoleId]) VALUES (?,2)";
+
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void DangKy(String email, String pw, String phone, String dc, String name) {
 
         User us = GetUserByEmil(email);
         if (us == null) {
             String query = "INSERT INTO [BANHANGGL].[dbo].[tb_USERS]\n"
-                    + "           ([Id]\n"
-                    + "           ,[Email]\n"
+                    + "           ([Email]\n"
                     + "           ,[PasswordHash]\n"
                     + "           ,[PhoneNumber]\n"
                     + "           ,[Diachi]\n"
                     + "           ,[Name])\n"
-                    + "     VALUES (?,?,?,?,?,?)";
+                    + "     VALUES (?,?,?,?,?)";
             try {
                 con = new DBContext().getConnection();
                 ps = con.prepareStatement(query);
-                ps.setString(1, id);
-                ps.setString(2, email);
-                ps.setString(3, pw);
-                ps.setString(4, phone);
-                ps.setString(5, dc);
-                ps.setString(6, name);
+                ps.setString(1, email);
+                ps.setString(2, pw);
+                ps.setString(3, phone);
+                ps.setString(4, dc);
+                ps.setString(5, name);
                 ps.executeUpdate();
+                
+                User user = GetUserByEmil(email);
+                
+                int id = user.getId();
+                
+                PhanQuyen(id);
+                
             } catch (Exception e) {
             }
         }
@@ -84,7 +121,7 @@ public class DAO_User {
             rs = ps.executeQuery();
             while (rs.next()) {
                 return new User(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -128,15 +165,14 @@ public class DAO_User {
 
     public static void main(String[] args) throws Exception {
         DAO_User d = new DAO_User();
-        String id = "5";
-        String em = "7";
+        String em = "77@gmail.com";
         String p = "5";
         String pn = "1";
         String ph = "1";
         String dc = "1";
         String name = "1";
 
-        d.DangKy(id, em, p, ph, dc, name);
+        d.DangKy(em, p, ph, dc, name);
         System.out.println();
     }
 

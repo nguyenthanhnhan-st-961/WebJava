@@ -1,0 +1,104 @@
+.sidebar__chooses {
+    padding: 5px 0 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--light);
+    border-bottom: 1px solid #ccc;
+}
+.sidebar__chooses-item {
+    width: 20%;
+    padding: 16px 0;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.sidebar__chooses-item:hover {
+    filter: brightness(90%);
+}
+.sidebar__chooses-item__icon {
+    font-size: 2rem;
+    font-weight: 550;
+    color: var(--white);
+}
+.sidebar__chooses-item:nth-of-type(1) {
+    background-color: var(--green);
+}
+.sidebar__chooses-item:nth-of-type(2) {
+    background-color: var(--blue);
+}
+.sidebar__chooses-item:nth-of-type(3) {
+    background-color: var(--orange);
+}
+.sidebar__chooses-item:nth-of-type(4) {
+    background-color: var(--red);
+}
+.sidebar {
+    height: 100vh;
+    background-color: var(--light);
+    user-select: none;
+}
+.sidebar__item {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+.sidebar__item i{
+    font-size: 20px;
+    margin-right: 5px;
+    color: #757F84;
+}
+#check-sidebar-list:checked + .sidebar__list {
+    display: block;
+}
+.sidebar__list {
+    display: none;
+    padding-left: 36px;
+}
+.sidebar__list-item {
+    border-bottom: 1px solid #ccc;
+}
+.sidebar__list-item__link {
+    display: block;
+    padding: 10px 0;
+    color: var(--gray-dark);
+    font-size: 1.4rem;
+}
+.sidebar__list-item__link:hover {
+    background-color: #ccc;
+}
+.sidebar__item:hover {
+    background-color: #ccc
+}
+.sidebar__item-link {
+    display: block;
+    padding: 10px 0;
+    flex-grow: 1;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+}
+.sidebar__item-icon {
+    font-size: 1.6rem;
+    color: var(--gray);
+    margin-right: 10px;
+}
+/******************** phần bên trái ************/
+.direct {
+    padding: 20px 0 20px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+    background-color: var(--light);
+}
+.direct-icon {
+    font-size: 1.6rem;
+    color: var(--gray);
+    margin-right: 5px;
+}
+.direct span {
+    font-weight: 550;
+}

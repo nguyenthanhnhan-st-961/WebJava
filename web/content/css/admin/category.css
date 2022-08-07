@@ -1,0 +1,106 @@
+.action {
+    padding: 5px 0;
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--light);
+    margin-top: 10px;
+}
+.action__add,
+.action__delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4%;
+    padding: 10px 0;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+.action__add {
+    background-color: var(--green);
+}
+.action__delete {
+    background-color: var(--danger);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.action-icon {
+    font-size: 1.4rem;
+    font-weight: 100;
+    color: var(--white);
+}
+/****************** body header ************/
+.categories {
+    margin-top: 10px;
+    border: 1px solid var(--gray-dark);
+    border-bottom: none;
+}
+.categories__header {
+    display: flex;
+    background-color: var(--light);
+    border-bottom: 1px solid var(--gray-dark);
+}
+.categories__header-column {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+}
+.categories__header-column:not(:last-child) {
+    border-right: 1px solid var(--gray-dark);
+}
+
+.categories__header-choose {
+    width: 10%;
+}
+.categories__header-name {
+    width: 80%;
+}
+.categories__header-update {
+    width: 10%;
+}
+/**************** body ************/
+.categories__body {
+    display: flex;
+    border-bottom: 1px solid var(--gray-dark);
+}
+.categories__body:nth-of-type(odd) {
+    background-color: var(--white);
+}
+.categories__body:nth-of-type(even) {
+    background-color: var(--light);
+}
+.categories__body-column {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+}
+.categories__body-column:not(:last-child) {
+    border-right: 1px solid var(--gray-dark);
+}
+
+.categories__body-choose {
+    width: 10%;
+}
+.categories__body-name {
+    width: 80%;
+}   
+.categories__body-update {
+    width: 10%;
+}
+.check-delete {
+    outline: none;
+    cursor: pointer;
+}
+.categories__body-icon {
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+    cursor: pointer;
+}
+.categories__body-icon:hover {
+    color: var(--orange);
+}

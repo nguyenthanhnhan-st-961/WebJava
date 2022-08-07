@@ -14,7 +14,7 @@
             <nav class="navbar navbar-expand-lg bg-light shadow-sm" style="position: fixed; z-index: 10; top:0; width:100%;">
                 <div class="container-fluid">
 
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="home">
                         <img src="content/img/logo.svg" style="height:32px; width:32px" alt="Logo" />
                     </a>
                     <a href="WEB-INF/content/img/logo.svg"></a>
@@ -83,9 +83,36 @@
                             </ul>
                         </div>
 
-                        <form class="d-flex" role="search">
-                            <input id="input" name="search" style="width:300px" class="form-control me-2" type="search" placeholder="Nhập sản phẩm cần tìm..." aria-label="Search">
+                        <form action="search" class="d-flex" enctype="multipart/form-data" >
+                            <input name="keyword" style="width:300px" class="form-control me-2" type="search" placeholder="Nhập sản phẩm cần tìm..." aria-label="Search">
+                            <button class="btn btn-primary me-3"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg></button>
                         </form>
+                      
+
+                        <c:choose>
+                            <c:when test="${sessionScope.user != null}">
+
+                                <div class="dropdown">
+                                    <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ${sessionScope.user.name}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="info?em=${sessionScope.user.email}">Thông tin tài khoản</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+
+                            </c:when>
+                            <c:otherwise>
+                                <a href="login" class="btn btn-primary">Đăng nhập</a>
+                            </c:otherwise>
+                        </c:choose>
+
+
+
 
 
                         <!--Gio hang-->
@@ -93,7 +120,9 @@
                 </div>
             </nav>
         </header>
-        
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     </body>
 </html>

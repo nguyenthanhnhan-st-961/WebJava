@@ -1,0 +1,30 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination__list {
+    display: flex;
+}
+.pagination__list-item {
+    margin-left: 10px;
+}
+.pagination__list-item__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 1.4rem;
+    color: var(--gray-dark);
+    background-color: #ccc;
+    border-radius: 5px;
+    transition: all ease-in 0.1s;
+}
+.pagination__list-item__link.active,
+.pagination__list-item__link:hover {
+    background-color: var(--dark);
+    color: var(--white);
+}
+.pagination__list-item__link i {
+    font-weight: 100;
+}

@@ -11,13 +11,13 @@ package entity;
 public class GioHang {
 
     private int idGioHang;
-    private String idUser;
+    private int idUser;
     private int idSP;
     private int SL;
     private float thanhTien;
     private String donGia;
 
-    public GioHang(int idGioHang, String idUser, int idSP, int SL, float thanhTien, String donGia) {
+    public GioHang(int idGioHang, int idUser, int idSP, int SL, float thanhTien, String donGia) {
         this.idGioHang = idGioHang;
         this.idUser = idUser;
         this.idSP = idSP;
@@ -34,11 +34,11 @@ public class GioHang {
         this.idGioHang = idGioHang;
     }
 
-    public String getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 

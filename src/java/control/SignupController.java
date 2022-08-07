@@ -46,17 +46,13 @@ public class SignupController extends HttpServlet {
 
             DAO_User dao = new DAO_User();
 
-            int len = 10; // Độ dài của String random
-            byte[] array = new byte[len];
-            new Random().nextBytes(array);
-            String generatedString = new String(array, Charset.forName("UTF-8"));
-
-            String id = generatedString;
-
-            dao.DangKy(id, email, pass, sdt, diachi, name);
+            dao.DangKy(email, pass, sdt, diachi, name);
+            
             response.sendRedirect("Login.jsp");
+           
 
             request.getRequestDispatcher("Signup.jsp").forward(request, response);
+          
         }
     }
 

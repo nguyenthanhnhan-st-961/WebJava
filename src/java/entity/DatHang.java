@@ -13,7 +13,7 @@ import java.sql.Date;
 public class DatHang {
 
     private int idDatHang;
-    private String idUser;
+    private int idUser;
     private Date ngayDat;
     private Date ngayGiao;
     private String ghiChu;
@@ -21,7 +21,7 @@ public class DatHang {
     private boolean thanhToan;
     private String trangThai;
 
-    public DatHang(int idDatHang, String idUser, Date ngayDat, Date ngayGiao, String ghiChu, float thanhTien, boolean thanhToan, String trangThai) {
+    public DatHang(int idDatHang, int idUser, Date ngayDat, Date ngayGiao, String ghiChu, float thanhTien, boolean thanhToan, String trangThai) {
         this.idDatHang = idDatHang;
         this.idUser = idUser;
         this.ngayDat = ngayDat;
@@ -40,11 +40,11 @@ public class DatHang {
         this.idDatHang = idDatHang;
     }
 
-    public String getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 

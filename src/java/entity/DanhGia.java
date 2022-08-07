@@ -11,12 +11,12 @@ package entity;
 public class DanhGia {
 
     private int idDanhGia;
-    private String idUser;
+    private int idUser;
     private int idSP;
     private float diem;
     private String danhGia;
 
-    public DanhGia(int idDanhGia, String idUser, int idSP, float diem, String danhGia) {
+    public DanhGia(int idDanhGia, int idUser, int idSP, float diem, String danhGia) {
         this.idDanhGia = idDanhGia;
         this.idUser = idUser;
         this.idSP = idSP;
@@ -32,11 +32,11 @@ public class DanhGia {
         this.idDanhGia = idDanhGia;
     }
 
-    public String getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 

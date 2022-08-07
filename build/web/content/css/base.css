@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+}
+.btn {
+    display: inline-block;
+    padding: 18px 0;
+    text-decoration: none;
+    border: 1px solid var(--orange);
+    outline: none;
+    background-color: var(--orange);
+    color: var(--white);
+    font-size: 1.6rem;
+    font-weight: 500;
+    min-width: 200px;
+    text-align: center;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: var(--white);
+    color: var(--orange);
+}
+.btn-userlogin {
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: var(--orange);
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: var(--white);
+    font-weight: 550;
+}
+.btn-userlogin:hover {
+    filter: brightness(90%);
+}

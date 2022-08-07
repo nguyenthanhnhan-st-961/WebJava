@@ -11,7 +11,7 @@
 <!doctype html>
 <html lang="en">
     <meta charset="utf-8"/>
-        <jsp:include page="Header.jsp"></jsp:include>
+    <jsp:include page="Header.jsp"></jsp:include>
         <div class="container">
             <div style="margin-bottom:3rem" id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -53,13 +53,12 @@
             </div>
             <h5 style="font-weight:700; margin-top:2rem">SẢN PHẨM</h5>
 
-            <hr />
-            <div class="row row-cols-1 row-cols-md-5 g-4">
+            <div id="data" class="row row-cols-1 row-cols-md-5 g-4 mb-3">
 
-            <c:forEach items="${listSP}" var="k">
+            <c:forEach items="${listSPorder}" var="k">
                 <div class="col">
                     <div class="card shadow card-hover" style="border-radius:8px">
-                        <a href="#">
+                        <a href="detail?id=${k.idSanPham}">
                             <img src="${k.hinhAnh}" class="card-img-top" alt="${k.hinhAnh}" style="border-radius:8px; margin-top:1rem">
                         </a>
                         <div class="card-body">
@@ -70,8 +69,64 @@
                 </div>
             </c:forEach>
         </div>
-        </div>
-        <jsp:include page="Footer.jsp"></jsp:include>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                <c:choose>
+                    <c:when test="${sessionScope.truocdoSP != 0}">
+                        <li class="page-item"><a class="page-link" href="home?idSP=${sessionScope.truocdoSP}">Trước đó</a></li>
+                        </c:when>
+                        <c:otherwise>
+                        <li class="page-item disabled"><a class="page-link" href="home?idSP=${sessionScope.truocdoSP}">Trước đó</a></li>
+                        </c:otherwise>
+                    </c:choose>
+
+                <c:forEach begin="1" end="${countSP}" var="i">
+                    <c:choose>
+                        <c:when test="${sessionScope.ketiepSP == i+1}">
+                            <li class="page-item active"><span class="page-link">${i}</span></li>
+                            </c:when>
+                            <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="home?idSP=${i}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                <c:choose>
+                    <c:when test="${sessionScope.ketiepSP > countSP}">
+                        <li class="page-item disabled"><a class="page-link" href="home?idSP=${sessionScope.ketiepSP}">Kế tiếp</a></li>
+                        </c:when>
+                        <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="home?idSP=${sessionScope.ketiepSP}">Kế tiếp</a></li>
+                        </c:otherwise>
+                    </c:choose>
+            </ul>
+        </nav>
+
+        <hr />
+    </div>
+    <jsp:include page="Footer.jsp"></jsp:include>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+            function ketiep() {
+                $.ajax({
+                    url: "/NStore/phantrang",
+                    type: "get", //send it through get method
+
+                    success: function (data) {
+                        var row = document.getElementById("data");
+                        row.innerHTML += data;
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                });
+
+            }
+
+
+    </script>
 </html>
 
 

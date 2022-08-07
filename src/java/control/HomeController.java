@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +31,7 @@ public class HomeController extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws javax.servlet.ServletException
-
+     *
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
@@ -38,14 +39,34 @@ public class HomeController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
+            HttpSession session = request.getSession();
             DAO dao = new DAO();
-            
+
             List<SanPham> list = dao.getAllSP();
-            
+
+            String indexSPString = request.getParameter("idSP");
+            if (indexSPString == null) {
+                indexSPString = "1";
+            }
+            int indexSP = Integer.parseInt(indexSPString);
+            List<SanPham> listorder = dao.getAllSanPhamPage(indexSP);
+            List<SanPham> listSP = dao.getAllSP();
+            int countSP = listSP.size();
+            if (countSP % 20 != 0) {
+                countSP = countSP / 20 + 1;
+            } else {
+                countSP = countSP / 20;
+            }
+            request.setAttribute("countSP", countSP);
+            request.setAttribute("countAllSP", listSP.size());
+            request.setAttribute("listSPorder", listorder);
+            session.setAttribute("truocdoSP", indexSP - 1);
+            session.setAttribute("ketiepSP", indexSP + 1);
+
             request.setAttribute("listSP", list);
             request.getRequestDispatcher("Home.jsp").forward(request, response);
-            
+
         }
     }
 

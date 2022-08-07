@@ -9,19 +9,19 @@ package entity;
  * @author ABC
  */
 public class Roles {
-    private String idRole;
+    private int idRole;
     private String name;
 
-    public Roles(String idRole, String name) {
+    public Roles(int idRole, String name) {
         this.idRole = idRole;
         this.name = name;
     }
 
-    public String getIdRole() {
+    public int getIdRole() {
         return idRole;
     }
 
-    public void setIdRole(String idRole) {
+    public void setIdRole(int idRole) {
         this.idRole = idRole;
     }
 
