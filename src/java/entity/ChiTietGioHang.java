@@ -8,25 +8,55 @@ package entity;
  *
  * @author ABC
  */
-public class GioHang {
+public class ChiTietGioHang {
 
     private int idGioHang;
     private int idUser;
+    private String tenUser;
     private int idSP;
+    private String tenSP;
+    private String hinhAnh;
     private int SL;
     private float thanhTien;
     private float donGia;
 
-    public GioHang(int idGioHang, int idUser, int idSP, int SL, float thanhTien, float donGia) {
+    public ChiTietGioHang(int idGioHang, int idUser, String tenUser, int idSP, String tenSP, String hinhAnh, int SL, float thanhTien, float donGia) {
         this.idGioHang = idGioHang;
         this.idUser = idUser;
+        this.tenUser = tenUser;
         this.idSP = idSP;
+        this.tenSP = tenSP;
+        this.hinhAnh = hinhAnh;
         this.SL = SL;
         this.thanhTien = thanhTien;
         this.donGia = donGia;
     }
 
-    public GioHang(String string, String string0) {
+    public String getTenUser() {
+        return tenUser;
+    }
+
+    public void setTenUser(String tenUser) {
+        this.tenUser = tenUser;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+
+    public ChiTietGioHang(String string, String string0) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -80,8 +110,9 @@ public class GioHang {
 
     @Override
     public String toString() {
-        return "GioHang{" + "idGioHang=" + idGioHang + ", idUser=" + idUser + ", idSP=" + idSP + ", SL=" + SL + ", thanhTien=" + thanhTien + ", donGia=" + donGia + '}';
+        return "ChiTietGioHang{" + "idGioHang=" + idGioHang + ", idUser=" + idUser + ", tenUser=" + tenUser + ", idSP=" + idSP + ", tenSP=" + tenSP + ", hinhAnh=" + hinhAnh + ", SL=" + SL + ", thanhTien=" + thanhTien + ", donGia=" + donGia + '}';
     }
-    
-    
+
+   
+
 }

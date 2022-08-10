@@ -5,11 +5,8 @@
 package control;
 
 import dao.DAO_User;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,13 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ABC
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/signup"})
-public class SignupController extends HttpServlet {
+@WebServlet(name = "QuenMatKhau", urlPatterns = {"/quenmk"})
+public class QuenMatKhau extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,26 +35,20 @@ public class SignupController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-
-            String email = request.getParameter("email");
-            String pass = request.getParameter("pass");
-            String sdt = request.getParameter("sdt");
-            String name = request.getParameter("name");
-            String diachi = request.getParameter("diachi");
-
+            /* TODO output your page here. You may use following sample code. */
+           
+            String emailString = request.getParameter("email");
             DAO_User dao = new DAO_User();
-
-            dao.DangKy(email, pass, sdt, diachi, name);
-            String tieudeString = "Xac nhan dang ky tai khoan";
-            String noidungString= "<p>Chúc mừng bạn đã đang ký thành công. Vui lòng nhấn vào </p> <a href=\"http://localhost:8080/NStore/xacnhanemail?id="+email+"\">đây </a> <p>để xác nhận.</p>";
             
-            SendMail.send(email, tieudeString, noidungString);
+            HttpSession session = request.getSession();
+            session.setAttribute("emaildl", emailString);
+             
+            String tieudeString = "Reset your password";
+            String noidungString= "<p>Nếu muốn đặt lại mật khẩu, vui lòng nhấn vào </p> <a href=\"http://localhost:8080/NStore/DatLaiMatKhau.jsp\">đây </a> <p>để đặt lại mật khẩu.</p>";
+            
+            SendMail.send(emailString, tieudeString, noidungString);
             
             response.sendRedirect("Login.jsp");
-           
-
-            request.getRequestDispatcher("Signup.jsp").forward(request, response);
-          
         }
     }
 
@@ -75,7 +67,7 @@ public class SignupController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QuenMatKhau.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,7 +85,7 @@ public class SignupController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QuenMatKhau.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

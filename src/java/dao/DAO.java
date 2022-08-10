@@ -54,17 +54,14 @@ public class DAO {
     }
 
     public List<SanPham> getAllSanPhamPage(int index) {
-        
+
         int end = 0;
-        if(index == 0){
-            end =20;
-        }
-        else{
+        if (index == 0) {
+            end = 20;
+        } else {
             end = (index - 1) * 20;
         }
-        
-        
-        
+
         List<SanPham> list = new ArrayList<>();
         String query = "select *\n"
                 + "from\n"
@@ -195,10 +192,26 @@ public class DAO {
         return list;
     }
 
+    public void ThayDoiTrangThai(String email) throws SQLException {
+        String query = "UPDATE [tb_USERS]\n"
+                + "   SET [XacNhanEmail] = 'true'\n"
+                + " WHERE Email = ?";
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, email);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+
+        
+    }
+
     public static void main(String[] args) throws Exception {
         DAO dao = new DAO();
 
-        dao.updateProduct("6", "1", "5555", 1, "3", "6", true);
+        dao.ThayDoiTrangThai("26");
 
 //        List<SanPham> list = dao.getSanPhamByName("iphone");
 //        for (SanPham k : list) {

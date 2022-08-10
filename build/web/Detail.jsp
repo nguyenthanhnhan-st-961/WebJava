@@ -105,10 +105,13 @@
 
                             <c:choose>
                                 <c:when test="${sp.trangThai == true}">
-                                    <a class="btn btn-warning mb-3" style="width:100%"
-                                       href="#">
-                                        Thêm giỏ hàng
-                                    </a>
+
+                                    <form action="addcart" class="d-flex" enctype="multipart/form-data" >
+                                        <input name="id" value="${sessionScope.user.id}" hidden>
+                                        <input name="idSP" value="${sp.idSanPham}" hidden>
+                                        <input class="btn btn-warning mb-3" type="submit" value="Thêm giỏ hàng">
+                                    </form>
+
                                 </c:when>
                                 <c:otherwise>
                                     <a class="btn btn-warning mb-3" style="width:100%"

@@ -4,12 +4,12 @@
  */
 package control;
 
-import dao.DAO_User;
-import entity.User;
+import dao.DAO_cart;
+import entity.ChiTietGioHang;
+import entity.GioHang;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.Random;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ABC
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/signup"})
-public class SignupController extends HttpServlet {
+@WebServlet(name = "ShowCartByID", urlPatterns = {"/showcart"})
+public class ShowCartByID extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,26 +37,13 @@ public class SignupController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            String id = request.getParameter("idUser");
+            DAO_cart dao = new DAO_cart();
+            List<ChiTietGioHang> list = dao.ShowAllByID(id);
 
-            String email = request.getParameter("email");
-            String pass = request.getParameter("pass");
-            String sdt = request.getParameter("sdt");
-            String name = request.getParameter("name");
-            String diachi = request.getParameter("diachi");
+            request.setAttribute("listGH", list);
+            request.getRequestDispatcher("GioHang.jsp").forward(request, response);
 
-            DAO_User dao = new DAO_User();
-
-            dao.DangKy(email, pass, sdt, diachi, name);
-            String tieudeString = "Xac nhan dang ky tai khoan";
-            String noidungString= "<p>Chúc mừng bạn đã đang ký thành công. Vui lòng nhấn vào </p> <a href=\"http://localhost:8080/NStore/xacnhanemail?id="+email+"\">đây </a> <p>để xác nhận.</p>";
-            
-            SendMail.send(email, tieudeString, noidungString);
-            
-            response.sendRedirect("Login.jsp");
-           
-
-            request.getRequestDispatcher("Signup.jsp").forward(request, response);
-          
         }
     }
 
@@ -75,7 +62,7 @@ public class SignupController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowCartByID.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,7 +80,7 @@ public class SignupController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowCartByID.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

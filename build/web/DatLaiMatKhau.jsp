@@ -81,30 +81,36 @@
     <body class="text-center">
 
         <main class="form-signin w-100 m-auto">
-            <form action="login" enctype="multipart/form-data">
+            <form action="resetpw" enctype="multipart/form-data">
                 <img class="mb-4" src="content/img/logo.svg" alt="" width="72" height="57">
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 class="h3 mb-3 fw-normal">Vui lòng đặt lại mật khẩu</h1>
 
-                <div class="form-floating">
-                    <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                </div>
-                <div class="form-floating">
-                    <input name="pass" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                </div>
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Sign in</button>
+                <input name="email" hidden value="${sessionScope.emaildl}">
                 
-                <a href="Signup.jsp">Sign up </a><br>
-                <a href="/NStore/QuenMatKhau.jsp" >Quên mật khẩu?</a>
-                <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+                <div class="form-floating mb-3">
+                    <input name="pass" type="password" class="form-control" id="floatingPasswordN" placeholder="Password" required>
+                    <label for="floatingPasswordN">Password</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPasswordC" placeholder="Password" required>
+                    <label for="floatingPasswordC">Password Confirm</label>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Xác nhận</button>
+
             </form>
+            <script>
+                pwc = document.getElementById("floatingPasswordC");
+                pwc.onchange = () => {
+                    pw = document.getElementById("floatingPasswordN");
+                    if (pw.value !== pwc.value) {
+
+                        alert("Mật khẩu xác nhận không trung khớp");
+                        pwc.value = '';
+                    }
+                }
+            </script>
         </main>
 
 

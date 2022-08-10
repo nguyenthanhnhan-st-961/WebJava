@@ -4,14 +4,16 @@
  */
 package control;
 
-import dao.DAO_User;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +24,43 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ABC
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/signup"})
-public class SignupController extends HttpServlet {
+@WebServlet(name = "SendMail", urlPatterns = {"/sendmail"})
+public class SendMail extends HttpServlet {
 
+    
+    public static void send(String to, String tieude, String noidung) {
+        Properties props = new Properties();
+
+        props.put("mail.smtp.host", "smtp.gmail.com");
+
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("19130158@st.hcmuaf.edu.vn", "nhanST123");
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("19130158@st.hcmuaf.edu.vn"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(tieude);
+            message.setContent(noidung, "text/html; charset=UTF-8");
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+        }
+    }
+    
+    public static void main(String[] args) {
+        send("nguyenphuduc62001@gmail.com", "Dang ky", "dang ky");
+    }
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -34,29 +70,11 @@ public class SignupController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-
-            String email = request.getParameter("email");
-            String pass = request.getParameter("pass");
-            String sdt = request.getParameter("sdt");
-            String name = request.getParameter("name");
-            String diachi = request.getParameter("diachi");
-
-            DAO_User dao = new DAO_User();
-
-            dao.DangKy(email, pass, sdt, diachi, name);
-            String tieudeString = "Xac nhan dang ky tai khoan";
-            String noidungString= "<p>Chúc mừng bạn đã đang ký thành công. Vui lòng nhấn vào </p> <a href=\"http://localhost:8080/NStore/xacnhanemail?id="+email+"\">đây </a> <p>để xác nhận.</p>";
-            
-            SendMail.send(email, tieudeString, noidungString);
-            
-            response.sendRedirect("Login.jsp");
+            /* TODO output your page here. You may use following sample code. */
            
-
-            request.getRequestDispatcher("Signup.jsp").forward(request, response);
-          
         }
     }
 
@@ -72,11 +90,7 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -90,11 +104,7 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

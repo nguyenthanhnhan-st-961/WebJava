@@ -10,6 +10,7 @@ import entity.UserRoles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -27,6 +28,16 @@ public class DAO_User {
         con = db.getConnection();
     }
 
+    public void datLaiMatKhau(String email, String newPW) throws ClassNotFoundException, SQLException {
+        String query = "UPDATE [BANHANGGL].[dbo].[tb_USERS] SET [PasswordHash] = ? WHERE Email = ?";
+        con = new DBContext().getConnection();
+        ps = con.prepareStatement(query);
+        ps.setString(1, newPW);
+        ps.setString(2, email);
+        ps.executeUpdate();
+        
+    }
+
     public User GetUserByEmil(String emString) {
         String query = "select * from tb_USERS where Email = ?";
         try {
@@ -41,13 +52,14 @@ public class DAO_User {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6));
+                        rs.getString(6),
+                        rs.getBoolean(7));
             }
         } catch (Exception e) {
         }
         return null;
     }
-    
+
     public UserRoles GetRoleById(int id) {
         String query = "SELECT [UserId] ,[RoleId] FROM [BANHANGGL].[dbo].[tb_USEROLES] "
                 + "where UserId = ?";
@@ -88,8 +100,10 @@ public class DAO_User {
                     + "           ,[PasswordHash]\n"
                     + "           ,[PhoneNumber]\n"
                     + "           ,[Diachi]\n"
-                    + "           ,[Name])\n"
-                    + "     VALUES (?,?,?,?,?)";
+                    + "           ,[Name]\n"
+                    + "           ,[XacNhanEmail])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?)";
             try {
                 con = new DBContext().getConnection();
                 ps = con.prepareStatement(query);
@@ -98,14 +112,15 @@ public class DAO_User {
                 ps.setString(3, phone);
                 ps.setString(4, dc);
                 ps.setString(5, name);
+                ps.setBoolean(6, false);
                 ps.executeUpdate();
-                
+
                 User user = GetUserByEmil(email);
-                
+
                 int id = user.getId();
-                
+
                 PhanQuyen(id);
-                
+
             } catch (Exception e) {
             }
         }
@@ -126,7 +141,8 @@ public class DAO_User {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6));
+                        rs.getString(6),
+                        rs.getBoolean(7));
             }
         } catch (Exception e) {
         }
@@ -172,8 +188,10 @@ public class DAO_User {
         String dc = "1";
         String name = "1";
 
-        d.DangKy(em, p, ph, dc, name);
-        System.out.println();
+//        d.DangKy(em, p, ph, dc, name);
+//        System.out.println();
+        
+        d.datLaiMatKhau(em, "4");
     }
 
 }

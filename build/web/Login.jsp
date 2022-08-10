@@ -101,7 +101,8 @@
                 </div>
                 <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Sign in</button>
                 
-                <a href="Signup.jsp" >Sign up</a>
+                <a href="Signup.jsp">Sign up </a><br>
+                <a href="/NStore/QuenMatKhau.jsp" >Quên mật khẩu?</a>
                 <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
             </form>
         </main>

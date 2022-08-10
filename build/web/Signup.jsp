@@ -82,38 +82,58 @@
     
 <main class="form-signin w-100 m-auto">
     <form action="signup" enctype="multipart/form-data">
-    <img class="mb-4" src="content/img/logo.svg" alt="" width="72" height="57">
+        <a href="home">
+            <img class="mb-4" src="content/img/logo.svg" alt="" width="72" height="57">
+        </a>
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-    <div class="form-floating">
-      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+    <div class="form-floating mb-3">
+      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Email address</label>
     </div>
-    <div class="form-floating">
-      <input name="pass" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+    <div class="form-floating mb-3">
+      <input name="pass" type="password" class="form-control" id="floatingPasswordN" placeholder="Password" required>
+      <label for="floatingPasswordN">Password</label>
     </div>
-    
-    <div class="form-floating">
-      <input name="name" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="floatingPasswordC" placeholder="Password" required>
+      <label for="floatingPasswordC">Password Confirm</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input name="name" type="text" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Họ và tên</label>
     </div>
     
-    <div class="form-floating">
-        <input name="sdt" type="text" class="form-control" id="floatingInput" placeholder="Password">
+    <div class="form-floating mb-3">
+        <input name="sdt" type="text" class="form-control" id="floatingInput" placeholder="Password" required>
       <label for="floatingInput">Số điện thoại </label>
     </div>
     <div class="form-floating">
-      <input name="diachi" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+        <input name="diachi" type="text" class="form-control" id="floatingPassword" placeholder="Password" required>
       <label for="floatingPassword">Địa chỉ</label>
     </div>
     
     
     
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit" id ="btn">Sign up</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
   </form>
+    
+    
+        <script>
+        pwc = document.getElementById("floatingPasswordC");
+        pwc.onchange = () => {
+            pw = document.getElementById("floatingPasswordN");
+            if(pw.value !== pwc.value) {
+
+            alert("Mật khẩu xác nhận không trung khớp");
+            pwc.value = '';
+            }
+        }
+        </script>
 </main>
 
 
