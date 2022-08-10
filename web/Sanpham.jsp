@@ -51,10 +51,30 @@
                                         <input type="text" class="form-control" name="tensp">
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Hình Ảnh</label>
-                                        <input type="text" class="form-control" name="hinhanh">
+
+                                    <div class="input-group mb-3">
+                                        <input placeholder="Hình ảnh" style="height: 4rem" type="file" class="form-control" id="image" name="image" accept="image/*" onchange="ImagesFileAsURL()"/>
+                                        <label style="height: 4rem" class="input-group-text" for="image">Hình ảnh</label>
                                     </div>
+
+                                    <div id="displayImg">
+                                    </div>
+                                    <script type="text/javascript">
+                                        function ImagesFileAsURL() {
+                                            var fileSelected = document.getElementById('image').files;
+                                            if (fileSelected.length > 0) {
+                                                var fileToLoad = fileSelected[0];
+                                                var fileReader = new FileReader();
+                                                fileReader.onload = function (fileLoaderEvent) {
+                                                    var srcData = fileLoaderEvent.target.result;
+                                                    var newImage = document.createElement('img');
+                                                    newImage.src = srcData;
+                                                    document.getElementById('displayImg').innerHTML = newImage.outerHTML;
+                                                }
+                                                fileReader.readAsDataURL(fileToLoad);
+                                            }
+                                        }
+                                    </script>
 
                                     <select name="hang" class="form-select mb-3" aria-label="Default select example">
                                         <option selected>Chọn hãng</option>

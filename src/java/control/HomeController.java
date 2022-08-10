@@ -6,6 +6,7 @@ package control;
 
 import dao.DAO;
 import entity.SanPham;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -41,6 +42,7 @@ public class HomeController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
 
             HttpSession session = request.getSession();
+
             DAO dao = new DAO();
 
             List<SanPham> list = dao.getAllSP();

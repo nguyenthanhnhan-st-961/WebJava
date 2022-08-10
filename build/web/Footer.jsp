@@ -17,8 +17,8 @@
         <hr />
         <div class="row" style="margin-bottom:5rem; color:black">
             <div class="col">
-                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                    <img class="xoay-logo" src="~/Content/images/logo.svg" style="height:32px; width:32px" />
+                <a class="navbar-brand" href="">
+                    <img class="xoay-logo" src="content/img/logo.svg" style="height:32px; width:32px" />
                 </a>
                 <div>
                     <p style="text-align: justify">NStore tự hào là đơn vị ủy quyền của nhiều đơn vị như: Apple, Samsung, Xiaomi,... Với 20 kinh nghiệm NStore đem lại cho người dùng những trải nghiệm tốt nhất.</p>

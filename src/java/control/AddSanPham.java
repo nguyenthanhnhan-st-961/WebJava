@@ -7,6 +7,8 @@ package control;
 import dao.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -34,8 +37,19 @@ public class AddSanPham extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            
+            Part part = request.getPart("image");
+
+            String repaString = request.getServletContext().getRealPath("/images");
+            String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+            if (!Files.exists(Paths.get(repaString))) {
+                Files.createDirectories(Paths.get(repaString));
+            }
+            part.write(repaString + "/" + filename);
+            String HINHANH = "images/" + filename;
+            
             String tensp = request.getParameter("tensp");
-            String hinhanh = request.getParameter("hinhanh");
             float giaban = Float.parseFloat(request.getParameter("giaban")) ;
             String hang = request.getParameter("hang");
             String mota = request.getParameter("mota");
@@ -44,7 +58,7 @@ public class AddSanPham extends HttpServlet {
             
             DAO dao = new DAO();
             
-            dao.addSP(tensp, hang, giaban, hinhanh, mota, trangthai);
+            dao.addSP(tensp, hang, giaban, HINHANH, mota, trangthai);
             
             response.sendRedirect("sanpham");
 

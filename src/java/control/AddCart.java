@@ -4,8 +4,10 @@
  */
 package control;
 
+import dao.DAO;
 import dao.DAO_cart;
 import entity.GioHang;
+import entity.SanPham;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -36,11 +38,16 @@ public class AddCart extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             DAO_cart dao = new DAO_cart();
+            DAO daosp = new DAO();
             String id = request.getParameter("id");
             String idSP = request.getParameter("idSP");
+            
+            SanPham sp = daosp.getSanPhamByID(idSP);
+            
             GioHang gh = dao.getCart(id, idSP);
+
             if (gh != null) {
-                dao.updateQuantity(id, idSP, gh.getSL() + 1);
+                dao.updateQuantity(id, idSP, gh.getSL() + 1, (int) sp.getGiaBan());
             } else {
                 dao.addProduct(id, idSP, 1);
                 

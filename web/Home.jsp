@@ -112,23 +112,21 @@
     <jsp:include page="Footer.jsp"></jsp:include>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-            function ketiep() {
-                $.ajax({
-                    url: "/NStore/phantrang",
-                    type: "get", //send it through get method
+        function ketiep() {
+            $.ajax({
+                url: "/NStore/phantrang",
+                type: "get", //send it through get method
 
-                    success: function (data) {
-                        var row = document.getElementById("data");
-                        row.innerHTML += data;
-                    },
-                    error: function (xhr) {
-                        //Do Something to handle error
-                    }
-                });
+                success: function (data) {
+                    var row = document.getElementById("data");
+                    row.innerHTML += data;
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
 
-            }
-
-
+        }
     </script>
 </html>
 

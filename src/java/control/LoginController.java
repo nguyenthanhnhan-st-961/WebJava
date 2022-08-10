@@ -54,6 +54,7 @@ public class LoginController extends HttpServlet {
                 
                 session.setAttribute("user", us);
                 
+                
                 session.setAttribute("userrole", usRoles);
                 
                 if(usRoles.getIdRole() == 1){  

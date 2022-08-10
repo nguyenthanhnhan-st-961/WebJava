@@ -55,12 +55,13 @@ public class DAO_cart {
         ps.executeUpdate();
     }
 
-    public void updateQuantity(String id, String idSP, int newQuantity) throws SQLException {
-        String query = "update tb_GIOHANG set SL = ? where Id = ? and IDSANPHAM = ?";
+    public void updateQuantity(String id, String idSP, int newQuantity, int gb) throws SQLException {
+        String query = "update tb_GIOHANG set SL = ?,THANHTIEN = ? where Id = ? and IDSANPHAM = ?";
         ps = con.prepareStatement(query);
         ps.setInt(1, newQuantity);
-        ps.setString(2, id);
-        ps.setString(3, idSP);
+        ps.setInt(2, newQuantity*gb);
+        ps.setString(3, id);
+        ps.setString(4, idSP);
         ps.executeUpdate();
     }
 
