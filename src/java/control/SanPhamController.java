@@ -5,7 +5,10 @@
 package control;
 
 import dao.DAO;
+import dao.DAO_User;
 import entity.SanPham;
+import entity.User;
+import entity.UserRoles;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -16,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,7 +41,16 @@ public class SanPhamController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            User user =(User) session.getAttribute("user");
             DAO dao = new DAO();
+            DAO_User daoUser = new DAO_User();
+            UserRoles usrl = daoUser.GetRoleById(user.getId());
+            
+            if(usrl.getIdRole() != 1) {
+                response.sendRedirect("home");
+            }
+            
             List<SanPham> listSP = dao.getAllSP();
              request.setAttribute("listAdSP", listSP);
             request.getRequestDispatcher("Sanpham.jsp").forward(request, response);

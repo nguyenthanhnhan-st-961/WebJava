@@ -113,6 +113,9 @@
                 </c:forEach>
                 </tbody>
             </table>
+                
+                <a class="btn btn-primary" href="dathang?idUser=${sessionScope.user.id}" >Đặt hàng</a>
+                
         </div>
 
         <jsp:include page="Footer.jsp"></jsp:include>

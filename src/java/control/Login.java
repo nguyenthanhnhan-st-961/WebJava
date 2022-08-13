@@ -5,10 +5,13 @@
 package control;
 
 import dao.DAO_User;
+import dao.DAO_cart;
+import entity.ChiTietGioHang;
 import entity.User;
 import entity.UserRoles;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ABC
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "Login", urlPatterns = {"/login"})
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,35 +39,37 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            
-            HttpSession session = request.getSession();
-            
-            String email = request.getParameter("email");
-            String pass = request.getParameter("pass");
-            
-            DAO_User dao = new DAO_User();
-            
-            User us = dao.DangNhap(email, pass);
-            
-            
-            if(us != null){
-                
-                UserRoles usRoles = dao.GetRoleById(us.getId());
-                
-                session.setAttribute("user", us);
-                
-                
-                session.setAttribute("userrole", usRoles);
-                
-                if(usRoles.getIdRole() == 1){  
-                    response.sendRedirect("sanpham");
-                }
-                else{
-                    response.sendRedirect("home");
-                }
+        HttpSession session = request.getSession();
+
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+
+        DAO_User dao = new DAO_User();
+
+        User us = dao.DangNhap(email, pass);
+
+        if (us != null) {
+
+            UserRoles usRoles = dao.GetRoleById(us.getId());
+
+            DAO_cart daoo = new DAO_cart();
+            List<ChiTietGioHang> list = daoo.ShowAllByID(String.valueOf(us.getId()));
+            session.setAttribute("sl", list.size());
+
+            session.setAttribute("user", us);
+
+            DAO_User daoUser = new DAO_User();
+            UserRoles usrl = daoUser.GetRoleById(us.getId());
+            session.setAttribute("idrole", usrl.getIdRole());
+            session.setAttribute("userrole", usRoles);
+
+            if (usRoles.getIdRole() == 1) {
+                response.sendRedirect("home");
+            } else {
+                response.sendRedirect("home");
             }
-            else request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
 
@@ -83,7 +88,7 @@ public class LoginController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -101,7 +106,7 @@ public class LoginController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

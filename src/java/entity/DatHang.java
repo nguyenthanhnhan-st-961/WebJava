@@ -15,19 +15,15 @@ public class DatHang {
     private int idDatHang;
     private int idUser;
     private Date ngayDat;
-    private Date ngayGiao;
     private String ghiChu;
-    private float thanhTien;
     private boolean thanhToan;
     private String trangThai;
 
-    public DatHang(int idDatHang, int idUser, Date ngayDat, Date ngayGiao, String ghiChu, float thanhTien, boolean thanhToan, String trangThai) {
+    public DatHang(int idDatHang, int idUser, Date ngayDat, String ghiChu, boolean thanhToan, String trangThai) {
         this.idDatHang = idDatHang;
         this.idUser = idUser;
         this.ngayDat = ngayDat;
-        this.ngayGiao = ngayGiao;
         this.ghiChu = ghiChu;
-        this.thanhTien = thanhTien;
         this.thanhToan = thanhToan;
         this.trangThai = trangThai;
     }
@@ -56,28 +52,12 @@ public class DatHang {
         this.ngayDat = ngayDat;
     }
 
-    public Date getNgayGiao() {
-        return ngayGiao;
-    }
-
-    public void setNgayGiao(Date ngayGiao) {
-        this.ngayGiao = ngayGiao;
-    }
-
     public String getGhiChu() {
         return ghiChu;
     }
 
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
-    }
-
-    public float getThanhTien() {
-        return thanhTien;
-    }
-
-    public void setThanhTien(float thanhTien) {
-        this.thanhTien = thanhTien;
     }
 
     public boolean isThanhToan() {
@@ -98,8 +78,8 @@ public class DatHang {
 
     @Override
     public String toString() {
-        return "DatHang{" + "idDatHang=" + idDatHang + ", idUser=" + idUser + ", ngayDat=" + ngayDat + ", ngayGiao=" + ngayGiao + ", ghiChu=" + ghiChu + ", thanhTien=" + thanhTien + ", thanhToan=" + thanhToan + ", trangThai=" + trangThai + '}';
+        return "DatHang{" + "idDatHang=" + idDatHang + ", idUser=" + idUser + ", ngayDat=" + ngayDat + ", ghiChu=" + ghiChu + ", trangThai=" + trangThai + '}';
     }
-    
-    
+
+ 
 }

@@ -102,9 +102,8 @@
 
                     <c:choose>
                         <c:when test="${sp.trangThai == true}">
-
                             <c:choose>
-                                <c:when test="${sp.trangThai == true}">
+                                <c:when test="${sessionScope.idrole == 2}">
 
                                     <form action="addcart" class="d-flex" enctype="multipart/form-data" >
                                         <input name="id" value="${sessionScope.user.id}" hidden>
@@ -115,7 +114,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <a class="btn btn-warning mb-3" style="width:100%"
-                                       href="#">
+                                       href="sanpham">
                                         Chỉnh sửa sản phẩm
                                     </a>
                                 </c:otherwise>

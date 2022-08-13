@@ -15,14 +15,27 @@
         <title>Bootstrap demo</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <style>
+            .logo:hover{
+                transform: rotate(-90deg);
+            }
+            .logo{
+                transition:0.3s;
+            }
+        </style>
     </head>
-    <body class="container" style="margin-top: 2rem">
 
+    <body class="container" style="margin-top: 2rem">
+        <div style="margin-bottom: 1rem">
+            <a href="home">
+                <img class="logo" src="content/img/logo.svg" style="height:32px; width:32px" alt="Logo">
+            </a>
+        </div>
         <div class="row">
             <div class="col-3">
                 <a style="width: 100%" class="btn btn-primary mb-3" href="sanpham">Danh sách sản phẩm</a>                
                 <a style="width: 100%" class="btn btn-primary mb-3" href="addsanpham">Thêm sản phẩm</a>                
-                <a style="width: 100%" class="btn btn-primary mb-3">Sản phẩm</a>                
+                <a style="width: 100%" class="btn btn-primary mb-3" href="thongke">Thống kê</a>                
                 <a style="width: 100%" class="btn btn-primary mb-3">Sản phẩm</a>                
                 <a style="width: 100%" class="btn btn-primary mb-3">Sản phẩm</a>                
             </div>            
@@ -43,7 +56,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form action="addsanpham" enctype="multipart/form-data">
+                                <form action="addsanpham" method="post" enctype="multipart/form-data">
 
 
                                     <div class="mb-3">
@@ -78,9 +91,12 @@
 
                                     <select name="hang" class="form-select mb-3" aria-label="Default select example">
                                         <option selected>Chọn hãng</option>
-                                        <option value="Apple">Apple</option>
+                                        <option value="Oppo">Oppo</option>
+                                        <option value="Iphone">Apple</option>
                                         <option value="Samsung">Samsung</option>
                                         <option value="Huawei">Huawei</option>
+                                        <option value="Realme">Realme</option>
+                                        <option value="Vivo">Vivo</option>
                                     </select>
 
                                     <div class="mb-3">

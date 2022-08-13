@@ -6,6 +6,8 @@ package dao;
 
 import context.DBContext;
 import entity.ChiTietGioHang;
+import entity.DatHang;
+import entity.DatHangAll;
 import entity.GioHang;
 import entity.SanPham;
 import entity.User;
@@ -13,8 +15,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +37,96 @@ public class DAO_cart {
         db = new DBContext();
         con = db.getConnection();
         dao = new DAO();
+    }
+
+    public List<DatHangAll> getAllDH() {
+        List<DatHangAll> list = new ArrayList<>();
+        String query = "SELECT     dbo.tb_CHITIETDATHANG.IDDATHANG, dbo.tb_DATHANG.Id, dbo.tb_USERS.Name, dbo.tb_USERS.Diachi,dbo.tb_USERS.PhoneNumber, dbo.tb_CHITIETDATHANG.IDSANPHAM, dbo.tb_SANPHAM.TENSANPHAM, dbo.tb_SANPHAM.HINHANH, \n"
+                + "                      dbo.tb_CHITIETDATHANG.SOLUONG, dbo.tb_CHITIETDATHANG.THANHTIEN, dbo.tb_SANPHAM.GIABAN, dbo.tb_DATHANG.NGAYDAT, dbo.tb_DATHANG.GHICHU, dbo.tb_DATHANG.THANHTOAN, \n"
+                + "                      dbo.tb_DATHANG.TRANGTHAI\n"
+                + "FROM         dbo.tb_CHITIETDATHANG INNER JOIN\n"
+                + "                      dbo.tb_DATHANG ON dbo.tb_CHITIETDATHANG.IDDATHANG = dbo.tb_DATHANG.IDDATHANG INNER JOIN\n"
+                + "                      dbo.tb_SANPHAM ON dbo.tb_CHITIETDATHANG.IDSANPHAM = dbo.tb_SANPHAM.IDSANPHAM INNER JOIN\n"
+                + "                      dbo.tb_USERS ON dbo.tb_DATHANG.Id = dbo.tb_USERS.Id";
+
+        try {
+//            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new DatHangAll(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getFloat(10),
+                        rs.getFloat(11),
+                        rs.getTimestamp(12),
+                        rs.getString(13),
+                        rs.getBoolean(14),
+                        rs.getString(15)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+
+    }
+    public List<DatHangAll> getAllDHById(int id) {
+        List<DatHangAll> list = new ArrayList<>();
+        String query = "SELECT     dbo.tb_CHITIETDATHANG.IDDATHANG, dbo.tb_DATHANG.Id, dbo.tb_USERS.Name, dbo.tb_USERS.Diachi,dbo.tb_USERS.PhoneNumber,dbo.tb_CHITIETDATHANG.IDSANPHAM, dbo.tb_SANPHAM.TENSANPHAM, dbo.tb_SANPHAM.HINHANH, \n"
+                + "                      dbo.tb_CHITIETDATHANG.SOLUONG, dbo.tb_CHITIETDATHANG.THANHTIEN, dbo.tb_SANPHAM.GIABAN, dbo.tb_DATHANG.NGAYDAT, dbo.tb_DATHANG.GHICHU, dbo.tb_DATHANG.THANHTOAN, \n"
+                + "                      dbo.tb_DATHANG.TRANGTHAI\n"
+                + "FROM         dbo.tb_CHITIETDATHANG INNER JOIN\n"
+                + "                      dbo.tb_DATHANG ON dbo.tb_CHITIETDATHANG.IDDATHANG = dbo.tb_DATHANG.IDDATHANG INNER JOIN\n"
+                + "                      dbo.tb_SANPHAM ON dbo.tb_CHITIETDATHANG.IDSANPHAM = dbo.tb_SANPHAM.IDSANPHAM INNER JOIN\n"
+                + "                      dbo.tb_USERS ON dbo.tb_DATHANG.Id = dbo.tb_USERS.Id where dbo.tb_USERS.Id = ?";
+
+        try {
+//            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new DatHangAll(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getFloat(10),
+                        rs.getFloat(11),
+                        rs.getTimestamp(12),
+                        rs.getString(13),
+                        rs.getBoolean(14),
+                        rs.getString(15)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+
+    }
+    public DatHang lastDatHang() throws SQLException {
+        DatHang result = null;
+        String query = "select top 1 * from tb_DATHANG ORDER BY IDDATHANG DESC";
+        ps = con.prepareStatement(query);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            result = new DatHang(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getString(4), rs.getBoolean(5), rs.getString(6));
+        }
+
+        return result;
     }
 
     public void addProduct(String id, String idSP, int sl) throws SQLException {
@@ -59,7 +154,7 @@ public class DAO_cart {
         String query = "update tb_GIOHANG set SL = ?,THANHTIEN = ? where Id = ? and IDSANPHAM = ?";
         ps = con.prepareStatement(query);
         ps.setInt(1, newQuantity);
-        ps.setInt(2, newQuantity*gb);
+        ps.setInt(2, newQuantity * gb);
         ps.setString(3, id);
         ps.setString(4, idSP);
         ps.executeUpdate();
@@ -171,7 +266,4 @@ public class DAO_cart {
 //        dao.removeProduct("1", "135");
     }
 
-    private List<ChiTietGioHang> ShowAllByID(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

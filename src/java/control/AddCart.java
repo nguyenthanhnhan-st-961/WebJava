@@ -6,10 +6,13 @@ package control;
 
 import dao.DAO;
 import dao.DAO_cart;
+import entity.ChiTietGioHang;
 import entity.GioHang;
 import entity.SanPham;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,19 +43,33 @@ public class AddCart extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             DAO_cart dao = new DAO_cart();
             DAO daosp = new DAO();
+            HttpSession session = request.getSession();
+
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Login.jsp");
+            };
+
             String id = request.getParameter("id");
             String idSP = request.getParameter("idSP");
-            
+
             SanPham sp = daosp.getSanPhamByID(idSP);
-            
+
             GioHang gh = dao.getCart(id, idSP);
 
             if (gh != null) {
                 dao.updateQuantity(id, idSP, gh.getSL() + 1, (int) sp.getGiaBan());
             } else {
                 dao.addProduct(id, idSP, 1);
-                
+
             }
+
+            if (session.getAttribute("user") != null) {
+                User use = (User) session.getAttribute("user");
+                DAO_cart daoo = new DAO_cart();
+                List<ChiTietGioHang> listt = daoo.ShowAllByID(String.valueOf(use.getId()));
+                session.setAttribute("sl", listt.size());
+            }
+
             response.sendRedirect("home");
         }
     }

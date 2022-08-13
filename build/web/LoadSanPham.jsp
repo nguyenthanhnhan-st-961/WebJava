@@ -34,9 +34,12 @@
 
             <select value="${sp.hang}" name="hang" class="form-select mb-3" aria-label="Default select example">
                 <option selected>Chọn hãng</option>
+                <option value="Oppo">Oppo</option>
                 <option value="Apple">Apple</option>
                 <option value="Samsung">Samsung</option>
                 <option value="Huawei">Huawei</option>
+                <option value="Realme">Realme</option>
+                <option value="Vivo">Vivo</option>
             </select>
 
             <div class="mb-3">
@@ -50,28 +53,28 @@
             </div>
 
             <div class="form-floating mb-3">
-                    <select style="height: 4rem" class="form-select" id="inputGroupSelect01" name="trangthai" required>
-                        <option selected>Trạng thái</option>
-                        <c:choose>
-                            <c:when test="${sp.trangThai==false}">
-                                <option selected value="false">Hết hàng</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="false">Hết hàng</option>
-                            </c:otherwise>
-                        </c:choose>
+                <select style="height: 4rem" class="form-select" id="inputGroupSelect01" name="trangthai" required>
+                    <option selected>Trạng thái</option>
+                    <c:choose>
+                        <c:when test="${sp.trangThai==false}">
+                            <option selected value="false">Hết hàng</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="false">Hết hàng</option>
+                        </c:otherwise>
+                    </c:choose>
 
-                        <c:choose>
-                            <c:when test="${sp.trangThai==true}">
-                                <option selected value="true">Còn hàng</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="true">Còn hàng</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </select>
-                    <label for="inputGroupSelect01">Trạng thái</label>
-                </div>
+                    <c:choose>
+                        <c:when test="${sp.trangThai==true}">
+                            <option selected value="true">Còn hàng</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="true">Còn hàng</option>
+                        </c:otherwise>
+                    </c:choose>
+                </select>
+                <label for="inputGroupSelect01">Trạng thái</label>
+            </div>
 
             <div class="modal-footer">
                 <a type="button" href="sanpham" class="btn btn-secondary">Hủy</a>

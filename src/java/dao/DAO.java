@@ -7,9 +7,11 @@ package dao;
 import context.DBContext;
 import entity.SanPham;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,39 @@ public class DAO {
     public DAO() throws Exception {
         db = new DBContext();
         con = db.getConnection();
+    }
+    
+    public void addChiTietDatHang(int idDatHang, int idSP, int soLuong, int thanhTien) throws SQLException {
+        String query = "INSERT INTO [BANHANGGL].[dbo].[tb_CHITIETDATHANG]\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?)";
+        ps = con.prepareStatement(query);
+        ps.setInt(1, idDatHang);
+        ps.setInt(2, idSP);
+        ps.setInt(3, soLuong);
+        ps.setInt(4, thanhTien);
+        ps.executeUpdate();
+
+    }
+
+    public void thanhToan(int idKH, LocalDateTime ngayDatHang, String ghiChu, boolean thanhToan, String trangThai) throws SQLException {
+        String query = "INSERT INTO [BANHANGGL].[dbo].[tb_DATHANG]\n"
+                + "           ([Id]\n"
+                + "             ,[NGAYDAT]\n"
+                + "           ,[GHICHU]\n"
+                + "           ,[THANHTOAN]\n"
+                + "           ,[TRANGTHAI])\n"
+                + "     VALUES(?,?,?,?,?)";
+
+        String time = ngayDatHang.getYear() + "-" + "08" + "-" + ngayDatHang.getDayOfMonth() + " " + ngayDatHang.getHour() + ":" + ngayDatHang.getMinute() + ":" + ngayDatHang.getSecond();
+
+        ps = con.prepareStatement(query);
+        ps.setInt(1, idKH);
+        ps.setString(2, time);
+        ps.setString(3, ghiChu);
+        ps.setBoolean(4, thanhToan);
+        ps.setString(5, trangThai);
+        ps.executeUpdate();
     }
 
     public List<SanPham> getAllSP() {
@@ -67,16 +102,16 @@ public class DAO {
                 + "from\n"
                 + "(\n"
                 + "select *,\n"
-                + "ROW_NUMBER() OVER (ORDER BY TENSANPHAM) AS Seq\n"
+                + "ROW_NUMBER() OVER (ORDER BY IDSANPHAM) AS Seq\n"
                 + "from tb_SANPHAM\n"
                 + ")t\n"
-                + "where Seq BETWEEN ? AND ?+19";
+                + "where Seq BETWEEN ?+1 AND ?+20";
 
         try {
 //            con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
-            ps.setInt(1, index);
-            ps.setInt(2, index);
+            ps.setInt(1, end);
+            ps.setInt(2, end);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -205,14 +240,16 @@ public class DAO {
         } catch (Exception e) {
         }
 
-        
     }
+//    public void DatHangChiTiet(String idDH, String idSP){
+//        String query = 
+//        
+//    }
 
     public static void main(String[] args) throws Exception {
         DAO dao = new DAO();
 
-        dao.ThayDoiTrangThai("26");
-
+//        dao.thanhToan("1", new Date(12, 8, 2022), new Date(13, 8, 2022), "", 10000, true, "chua thanh toan");
 //        List<SanPham> list = dao.getSanPhamByName("iphone");
 //        for (SanPham k : list) {
 //            System.out.println(k);

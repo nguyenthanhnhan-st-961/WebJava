@@ -11,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import javax.servlet.http.Part;
  *
  * @author ABC
  */
+@MultipartConfig
 @WebServlet(name = "AddSanPham", urlPatterns = {"/addsanpham"})
 public class AddSanPham extends HttpServlet {
 
@@ -36,33 +39,6 @@ public class AddSanPham extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            
-            Part part = request.getPart("image");
-
-            String repaString = request.getServletContext().getRealPath("/images");
-            String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-
-            if (!Files.exists(Paths.get(repaString))) {
-                Files.createDirectories(Paths.get(repaString));
-            }
-            part.write(repaString + "/" + filename);
-            String HINHANH = "images/" + filename;
-            
-            String tensp = request.getParameter("tensp");
-            float giaban = Float.parseFloat(request.getParameter("giaban")) ;
-            String hang = request.getParameter("hang");
-            String mota = request.getParameter("mota");
-            boolean trangthai = true;
-            
-            
-            DAO dao = new DAO();
-            
-            dao.addSP(tensp, hang, giaban, HINHANH, mota, trangthai);
-            
-            response.sendRedirect("sanpham");
-
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,11 +53,8 @@ public class AddSanPham extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(AddSanPham.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        RequestDispatcher rd = request.getRequestDispatcher("Sanpham.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -95,10 +68,33 @@ public class AddSanPham extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try{
+
+            Part part = request.getPart("image");
+
+            String repaString = request.getServletContext().getRealPath("/images");
+            String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+            if (!Files.exists(Paths.get(repaString))) {
+                Files.createDirectories(Paths.get(repaString));
+            }
+            part.write(repaString + "/" + filename);
+            String HINHANH = "images/" + filename;
+
+            String tensp = request.getParameter("tensp");
+            float giaban = Float.parseFloat(request.getParameter("giaban"));
+            String hang = request.getParameter("hang");
+            String mota = request.getParameter("mota");
+            boolean trangthai = true;
+
+            DAO dao = new DAO();
+
+            dao.addSP(tensp, hang, giaban, HINHANH, mota, trangthai);
+
+            response.sendRedirect("sanpham");
+
         } catch (Exception ex) {
-            Logger.getLogger(AddSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

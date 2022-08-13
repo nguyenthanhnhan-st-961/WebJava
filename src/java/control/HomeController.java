@@ -5,6 +5,8 @@
 package control;
 
 import dao.DAO;
+import dao.DAO_cart;
+import entity.ChiTietGioHang;
 import entity.SanPham;
 import entity.User;
 import java.io.IOException;
@@ -60,6 +62,16 @@ public class HomeController extends HttpServlet {
             } else {
                 countSP = countSP / 20;
             }
+            
+            
+            if (session.getAttribute("user") != null) {
+                User use = (User) session.getAttribute("user");
+                DAO_cart daoo = new DAO_cart();
+                List<ChiTietGioHang> listt = daoo.ShowAllByID(String.valueOf(use.getId()));
+                session.setAttribute("sl", listt.size());
+            }
+            
+            
             request.setAttribute("countSP", countSP);
             request.setAttribute("countAllSP", listSP.size());
             request.setAttribute("listSPorder", listorder);
