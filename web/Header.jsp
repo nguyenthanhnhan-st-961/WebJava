@@ -50,52 +50,56 @@
                                 Thương hiệu
                             </button>
 
-                            <ul class="dropdown-menu">
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", new { @thuonghieu = "Apple"})">
-                                        <img src="content/images/ap.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Samsung"})">
-                                        <img src="content/images/ss.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Xiaomi"})">
-                                        <img src="content/images/op.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Huawei"})">
-                                        <img src="content/images/rm.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Google"})">
-                                        <img src="content/images/xm.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Oppo"})">
-                                        <img src="content/images/vv.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Nokia"})">
-                                        <img src="content/images/hw.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Sony"})">
-                                        <img src="content/images/gg.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
-                                <li class="swiper-slide">
-                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Vivo"})">
-                                        <img src="content/images/nk.png" style="height:48px; width: 48px" />
-                                    </a>
-                                </li>
+                            <ul class="dropdown-menu" style="text-align: center">
+                                <c:forEach items="${listHang}" var="hang">
+                                    <li class="swiper-slide">
+                                        <a href="locsanpham?hang=${hang}">
+                                            ${hang}
+<!--                                            <img src="content/images/ap.png" style="height:48px; width: 48px" />-->
+                                        </a>
+                                    </li>
+                                </c:forEach>
+
+                                <!--                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Samsung"})">
+                                                                        <img src="content/images/ss.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Xiaomi"})">
+                                                                        <img src="content/images/op.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Huawei"})">
+                                                                        <img src="content/images/rm.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Google"})">
+                                                                        <img src="content/images/xm.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Oppo"})">
+                                                                        <img src="content/images/vv.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Nokia"})">
+                                                                        <img src="content/images/hw.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Sony"})">
+                                                                        <img src="content/images/gg.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>
+                                                                <li class="swiper-slide">
+                                                                    <a href="@Url.Action("Index", "Home", new { @thuonghieu = "Vivo"})">
+                                                                        <img src="content/images/nk.png" style="height:48px; width: 48px" />
+                                                                    </a>
+                                                                </li>-->
                             </ul>
                         </div>
 
@@ -106,11 +110,6 @@
                                 </svg></button>
                         </form>
                         <c:if test="${sessionScope.userrole.getIdRole() != 1}">
-
-
-
-
-
                             <a data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="left" data-bs-content="Giỏ hàng" style="margin-right: 1rem" href="showcart?idUser=${sessionScope.user.id}" class="btn btn-warning position-relative">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
                                 <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
@@ -129,8 +128,8 @@
                                 <c:choose>
                                     <c:when test="${sessionScope.userrole.getIdRole() == 1}">
                                         <div class="dropstart">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-person-circle"></i>
+                                            <button class="btn dropdown-toggle" style="outline: none; border: none;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img style="height: 42px;width: 42px;border-radius: 50%;"src="content/images/Account.png">
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="info?em=${sessionScope.user.email}">Thông tin tài khoản</a></li>
@@ -142,8 +141,8 @@
                                     </c:when>
                                     <c:otherwise>
                                         <div class="dropstart">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-person-circle"></i>
+                                            <button class="btn dropdown-toggle" style="outline: none; border: none;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img style="height: 42px;width: 42px;border-radius: 50%;"src="content/images/Account.png">
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="info?em=${sessionScope.user.email}">Thông tin tài khoản</a></li>

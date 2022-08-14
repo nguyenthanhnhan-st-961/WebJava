@@ -5,10 +5,7 @@
 package control;
 
 import dao.DAO;
-import dao.DAO_cart;
-import entity.ChiTietGioHang;
 import entity.SanPham;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,72 +16,34 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Hung
+ * @author ABC
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "LocSanPham", urlPatterns = {"/locsanpham"})
+public class LocSanPham extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws javax.servlet.ServletException
-     *
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-
-            HttpSession session = request.getSession();
-
-            DAO dao = new DAO();
-
-            List<SanPham> list = dao.getAllSP();
+         response.setContentType("text/html;charset=UTF-8");
+       
+          DAO dao = new DAO();
+          String hang = request.getParameter("hang");
+            List<SanPham> listSP = dao.getSanPhamHang(hang);
             List<String> listHang = dao.getAllHang();
   
-
-            String indexSPString = request.getParameter("idSP");
-            if (indexSPString == null) {
-                indexSPString = "1";
-            }
-            int indexSP = Integer.parseInt(indexSPString);
-            List<SanPham> listorder = dao.getAllSanPhamPage(indexSP);
-            List<SanPham> listSP = dao.getAllSP();
-            int countSP = listSP.size();
-            if (countSP % 20 != 0) {
-                countSP = countSP / 20 + 1;
-            } else {
-                countSP = countSP / 20;
-            }
-            
-            
-            if (session.getAttribute("user") != null) {
-                User use = (User) session.getAttribute("user");
-                DAO_cart daoo = new DAO_cart();
-                List<ChiTietGioHang> listt = daoo.ShowAllByID(String.valueOf(use.getId()));
-                session.setAttribute("sl", listt.size());
-            }
-            
-            
-            request.setAttribute("countSP", countSP);
-            request.setAttribute("countAllSP", listSP.size());
-            request.setAttribute("listSPorder", listorder);
-            session.setAttribute("truocdoSP", indexSP - 1);
-            session.setAttribute("ketiepSP", indexSP + 1);
-
-            request.setAttribute("listHang", listHang);
-            request.setAttribute("listSP", list);
+          request.setAttribute("listHang", listHang);
+          request.setAttribute("listSPorder", listSP);
             request.getRequestDispatcher("Home.jsp").forward(request, response);
-
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -102,7 +61,7 @@ public class HomeController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LocSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,7 +79,7 @@ public class HomeController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LocSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

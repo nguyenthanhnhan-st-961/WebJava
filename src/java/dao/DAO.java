@@ -179,8 +179,52 @@ public class DAO {
         }
 
     }
+    //lọc san phẩm theo hãng
+    public List<String> getAllHang(){
+        String query = "select distinct HANG from tb_SANPHAM";
+        List<String> list = new ArrayList<>();
+        try {
+            con = new DBContext().getConnection();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String hang = rs.getString("HANG");
+                list.add(hang);
+                
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
+    
+    }
+    public List<SanPham> getSanPhamHang(String hang){
+        String query = "select * from tb_SANPHAM where HANG = ?";
+        List<SanPham> listSP = new ArrayList<SanPham>();
+    try {
+            con = new DBContext().getConnection();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            ps.setString(1, hang);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getFloat(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7));
+                listSP.add(sp);
+            }
+            return listSP;
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     //tim san pham theo id
+    
     public SanPham getSanPhamByID(String idSP) {
         String query = "select * from tb_SANPHAM where IDSANPHAM = ?";
         try {
@@ -247,7 +291,9 @@ public class DAO {
 //    }
 
     public static void main(String[] args) throws Exception {
-        DAO dao = new DAO();
+//        DAO dao = new DAO();
+//       SanPham list =  dao.getSanPhamHang("Oppo");
+//        System.out.println(list);
 
 //        dao.thanhToan("1", new Date(12, 8, 2022), new Date(13, 8, 2022), "", 10000, true, "chua thanh toan");
 //        List<SanPham> list = dao.getSanPhamByName("iphone");
