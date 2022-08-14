@@ -4,6 +4,7 @@
  */
 package control;
 
+import dao.DAO;
 import dao.DAO_cart;
 import entity.ChiTietGioHang;
 import java.io.IOException;
@@ -36,11 +37,11 @@ public class ShowCart extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("idUser");
-            DAO_cart dao = new DAO_cart();
-            List<ChiTietGioHang> list = dao.ShowAllByID(id);
-
-            request.setAttribute("listGH", list);
-            request.getRequestDispatcher("GioHang.jsp").forward(request, response);
+        DAO_cart dao = new DAO_cart();
+        List<ChiTietGioHang> list = dao.ShowAllByID(id);
+      
+        request.setAttribute("listGH", list);
+        request.getRequestDispatcher("GioHang.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

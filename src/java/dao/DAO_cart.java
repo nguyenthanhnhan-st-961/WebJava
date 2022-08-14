@@ -266,4 +266,7 @@ public class DAO_cart {
 //        dao.removeProduct("1", "135");
     }
 
+    public List<String> getAllHang() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -36,8 +36,7 @@
                 <a style="width: 100%" class="btn btn-primary mb-3" href="sanpham">Danh sách sản phẩm</a>                
                 <a style="width: 100%" class="btn btn-primary mb-3" href="addsanpham">Thêm sản phẩm</a>                
                 <a style="width: 100%" class="btn btn-primary mb-3" href="thongke">Thống kê</a>                
-                <a style="width: 100%" class="btn btn-primary mb-3">Sản phẩm</a>                
-                <a style="width: 100%" class="btn btn-primary mb-3">Sản phẩm</a>                
+              
             </div>            
             <div class="col">
 
@@ -94,7 +93,7 @@
                                         <option value="Oppo">Oppo</option>
                                         <option value="Iphone">Apple</option>
                                         <option value="Samsung">Samsung</option>
-                                        <option value="Huawei">Huawei</option>
+                                        <option value="Xiaome">Xiaome</option>
                                         <option value="Realme">Realme</option>
                                         <option value="Vivo">Vivo</option>
                                     </select>

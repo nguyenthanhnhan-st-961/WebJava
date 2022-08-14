@@ -22,6 +22,13 @@
             .logo{
                 transition:0.3s;
             }
+            .type{
+                text-decoration: none;
+                color: #000;
+            }
+/*            .swiper-slide:hover{
+                background-color:gray;
+            }*/
         </style>
     </head>
 
@@ -53,7 +60,7 @@
                             <ul class="dropdown-menu" style="text-align: center">
                                 <c:forEach items="${listHang}" var="hang">
                                     <li class="swiper-slide">
-                                        <a href="locsanpham?hang=${hang}">
+                                        <a  class="type" href="locsanpham?hang=${hang}">
                                             ${hang}
 <!--                                            <img src="content/images/ap.png" style="height:48px; width: 48px" />-->
                                         </a>
@@ -141,7 +148,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <div class="dropstart">
-                                            <button class="btn dropdown-toggle" style="outline: none; border: none;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn " style="outline: none; border: none;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <img style="height: 42px;width: 42px;border-radius: 50%;"src="content/images/Account.png">
                                             </button>
                                             <ul class="dropdown-menu">

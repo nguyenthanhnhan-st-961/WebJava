@@ -37,7 +37,7 @@
                 <option value="Oppo">Oppo</option>
                 <option value="Apple">Apple</option>
                 <option value="Samsung">Samsung</option>
-                <option value="Huawei">Huawei</option>
+                <option value="Xiaome">Xiaome</option>
                 <option value="Realme">Realme</option>
                 <option value="Vivo">Vivo</option>
             </select>

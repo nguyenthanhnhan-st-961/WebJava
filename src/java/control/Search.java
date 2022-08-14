@@ -39,7 +39,9 @@ public class Search extends HttpServlet {
           DAO dao = new DAO();
           String keyword = request.getParameter("keyword");
           List<SanPham> list = dao.getSanPhamByName(keyword);
+          List<String> listHang = dao.getAllHang();
           
+          request.setAttribute("listHang", listHang);
           request.setAttribute("listSPorder", list);
             request.getRequestDispatcher("Home.jsp").forward(request, response);
         }

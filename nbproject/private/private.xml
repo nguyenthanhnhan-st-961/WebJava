@@ -6,8 +6,12 @@
             <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/web/Header.jsp</file>
             <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/src/java/control/HomeController.java</file>
             <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/src/java/dao/DAO.java</file>
+            <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/web/LoadSanPham.jsp</file>
             <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/web/Home.jsp</file>
             <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/src/java/control/LocSanPham.java</file>
+            <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/src/java/dao/DAO_cart.java</file>
+            <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/src/java/control/ShowCart.java</file>
+            <file>file:/C:/Users/ABC/Documents/NetBeansProjects/WebJava/src/java/control/Search.java</file>
         </group>
     </open-files>
 </project-private>
