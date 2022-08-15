@@ -4,6 +4,7 @@
  */
 package control;
 
+import dao.DAO;
 import dao.DAO_cart;
 import entity.DatHangAll;
 import entity.User;
@@ -37,21 +38,22 @@ public class Lichsu extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession();
-        
+
         User us = (User) session.getAttribute("user");
-        
+
         DAO_cart dao = new DAO_cart();
-        
+        DAO daoo = new DAO();
+
         List<DatHangAll> list = dao.getAllDHById(us.getId());
-        
+
+        List<String> listHang = daoo.getAllHang();
+
+        request.setAttribute("listHang", listHang);
         request.setAttribute("list", list);
         request.getRequestDispatcher("Lichsu.jsp").forward(request, response);
-        
-        
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

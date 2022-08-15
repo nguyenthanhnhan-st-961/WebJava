@@ -40,7 +40,7 @@ public class SendMail extends HttpServlet {
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("19130158@st.hcmuaf.edu.vn", "nhanST123");
+                return new PasswordAuthentication("19130259@st.hcmuaf.edu.vn", "tung2912");
             }
         });
 
